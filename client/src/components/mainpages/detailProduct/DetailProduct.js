@@ -2,6 +2,9 @@ import React, {useContext, useState, useEffect} from 'react'
 import {useParams, Link} from 'react-router-dom'
 import {GlobalState} from '../../../GlobalState'
 import ProductItem from '../utils/productItem/ProductItem'
+import Rating from '../rating/Rating'
+import FormInput from '../rating/FormInput'
+
 
 
 function DetailProduct() {
@@ -10,6 +13,8 @@ function DetailProduct() {
     const [products] = state.productsAPI.products
     const addCart = state.userAPI.addCart
     const [detailProduct, setDetailProduct] = useState([])
+    const socket = state.socket
+    const [rating, setRating] = useState(0)
 
     useEffect(() =>{
         if(params.id){
@@ -32,6 +37,8 @@ function DetailProduct() {
                         <h6>#id: {detailProduct.product_id}</h6>
                     </div>
                     <span>$ {detailProduct.price}</span>
+                    <h3>Rating: {detailProduct.numReviews} reviews</h3>
+                    <Rating props={detailProduct} />
                     <p>{detailProduct.description}</p>
                     <p>{detailProduct.content}</p>
                     <p>Sold: {detailProduct.sold}</p>
@@ -40,6 +47,13 @@ function DetailProduct() {
                         Buy Now
                     </Link>
                 </div>
+            </div>
+
+            <div className='comments'>
+                <h2 className='app-title'> Comment</h2>
+            </div>
+            <div className='reviews'>
+               <FormInput />
             </div>
 
             <div>

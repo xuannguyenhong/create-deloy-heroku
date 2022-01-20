@@ -6,6 +6,7 @@ const fileUpload = require('express-fileupload')
 const cookieParser = require('cookie-parser')
 const path = require('path')
 
+const Comments = require('./models/commentModel')
 
 const app = express()
 app.use(express.json())
@@ -14,6 +15,9 @@ app.use(cors())
 app.use(fileUpload({
     useTempFiles: true
 }))
+
+
+
 
 // Routes
 app.use('/user', require('./routes/userRouter'))
